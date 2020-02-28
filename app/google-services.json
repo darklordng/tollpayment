@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1013729587794",
+    "firebase_url": "https://tollpayment-9aeaa.firebaseio.com",
+    "project_id": "tollpayment-9aeaa",
+    "storage_bucket": "tollpayment-9aeaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1013729587794:android:8cbd743089efd11677658b",
+        "android_client_info": {
+          "package_name": "com.example.tollpayment"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1013729587794-uprpia2vd3vvhlveb8o8n6lo76idb40p.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.tollpayment",
+            "certificate_hash": "a642ce9b88a6e1c850bd0bace09e45357e87f6dd"
+          }
+        },
+        {
+          "client_id": "1013729587794-oi4o9mbqvkaaskc5vcehrrvq0b9hh31t.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAhIqgcrdlQgfU9FQ9-0jz5YCl3IfWL5AU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1013729587794-oi4o9mbqvkaaskc5vcehrrvq0b9hh31t.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
