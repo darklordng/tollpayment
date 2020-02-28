@@ -21,7 +21,7 @@ import co.paystack.android.model.Card;
 import co.paystack.android.model.Charge;
 import es.dmoral.toasty.Toasty;
 
-public class PaymentActivity extends AppCompatActivity {
+public class PaymentActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     Context context = this;
     TextInputEditText cardNumber, expiryDate, cvv;
     Button getStartedButton;
@@ -42,13 +42,14 @@ public class PaymentActivity extends AppCompatActivity {
         cardSpinner = findViewById(R.id.card_type_spinner);
         getStartedButton = findViewById(R.id.payment_button);
 
-        cardSpinner.setOnItemSelectedListener((AdapterView.OnItemSelectedListener) context);
+
 
         //Creating the ArrayAdapter instance having the country list
-        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,cardType);
+        ArrayAdapter<String> aa = new ArrayAdapter<>(this,android.R.layout.simple_spinner_item,cardType);
         aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         //Setting the ArrayAdapter data on the Spinner
         cardSpinner.setAdapter(aa);
+        cardSpinner.setOnItemSelectedListener(this);
 
         //initialize the paystack sdk
         PaystackSdk.initialize(context);
@@ -106,6 +107,15 @@ public class PaymentActivity extends AppCompatActivity {
 
     }
 
+    @Override
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
+
+    }
 }
 
 class Bootstrap {

@@ -13,6 +13,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.tollpayment.R;
+import com.example.tollpayment.utils.NetworkUtils;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -70,13 +71,18 @@ public class LoginActivity extends AppCompatActivity {
         getInButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getIn();
+                if (NetworkUtils.isNetworkAvailable(context)) {
+
+                    getIn();
+                }else {
+                    Toasty.error(context, "Network not available", Toasty.LENGTH_LONG).show();
+                }
             }
         });
     }
 
     private void getIn() {
-
+        acProgressFlower.show();
         Query userQuery =
                 usersRef.orderByChild("email").equalTo(tollId.getText().toString().trim());
 
@@ -84,12 +90,21 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.exists()) {
-                    String user = String.valueOf(dataSnapshot.child("name").getValue());
-                    startActivity(new Intent(context, MainActivity.class));
-                    Toasty.success(context, "Welcome back "+user, Toasty.LENGTH_LONG).show();
-                    finish();
+                    acProgressFlower.dismiss();
+                   for (DataSnapshot snapshot: dataSnapshot.getChildren()) {
+                       String user = String.valueOf(snapshot.child("name").getValue());
+                       String pass = String.valueOf(snapshot.child("password").getValue());
+                       if (pass.equals(password.getText().toString().trim())) {
+                           startActivity(new Intent(context, MainActivity.class));
+                           Toasty.success(context, "Welcome back "+user, Toasty.LENGTH_LONG).show();
+                           finish();
+                       }else {
+                           Toasty.error(context, "Invalid Login Credentials", Toasty.LENGTH_LONG).show();
+                       }
+                   }
                 }else {
-                    Toasty.error(context, "Invalid Login Credentials", Toasty.LENGTH_LONG).show();
+                    acProgressFlower.dismiss();
+                    Toasty.error(context, "User not registered", Toasty.LENGTH_LONG).show();
                 }
             }
 
